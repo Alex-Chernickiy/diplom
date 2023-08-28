@@ -1,20 +1,16 @@
-name: 'Terraform'
+name: "Terraform"
 
 on:
   push:
-    branches: [ "main" ]
-  
+    branches: ["main"]
+
 jobs:
   terraform:
-    name: 'Terraform'
+    name: "Terraform"
     runs-on: ubuntu-latest
     env:
-       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      # AWS_ACCESS_KEY_ID: AKIARNGVWZTHN4D5Y7OR
-      # AWS_SECRET_ACCESS_KEY: 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
-    
-    
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest
     defaults:
@@ -22,34 +18,24 @@ jobs:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-      
-    - name: see secrets
-      run: |
-        echo ${{ secrets.AWS_ACCESS_KEY_ID }}
-        echo ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.5.6
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.5.6
 
-    # Terraform init
-    - name: Terraform Init Reconfigure
-      run: terraform init -reconfigure
+      # Terraform init
+      - name: Terraform Init Reconfigure
+        run: terraform init -reconfigure
 
-      
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform fmt
-      run: terraform fmt
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform fmt
+        run: terraform fmt
 
-
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-    - name: Terraform Apply
-      #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      #run: terraform apply -auto-approve -var-file=dev.tfvars
-      run: terraform plan -var-file=dev.tfvars
+        # On push to "main", build or change infrastructure according to Terraform configuration files
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var-file=dev.tfvars
