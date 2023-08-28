@@ -32,7 +32,9 @@ jobs:
 
     - name: credentials add
       run: export AWS_ACCESS_KEY_ID="AKIARNGVWZTHN4D5Y7OR"
-           export AWS_SECRET_ACCESS_KEY="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"
+    
+    - name: credentials add
+      run: export AWS_SECRET_ACCESS_KEY="Q2KxHIdho1ZJL59PR35Yq8SPQHntxCTGnorfjjv/"
 
 
     - name: Terraform Init Reconfigure
