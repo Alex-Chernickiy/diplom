@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v3
       
     - name: see secrets
-      run: echo $AWS_ACCESS_KEY_ID > file; cat file
+      run: echo $AWS_ACCESS_KEY_ID
       
     - name: see secrets 2
       run: echo $AWS_SECRET_ACCESS_KEY > file; cat file
