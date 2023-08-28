@@ -1,5 +1,5 @@
 resource "aws_iam_role" "my_node_role" {
-  name = "my-node-group-role"
+  name = "my-${var.env}-node-group-role"
 
   assume_role_policy = <<POLICY
 {
@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "EC2ContainerRegistry" {
 
 resource "aws_eks_node_group" "my_node_group" {
   cluster_name    = aws_eks_cluster.my-cluster.name
-  node_group_name = "my-node-group"
+  node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.my_node_role.arn
   subnet_ids = [
     aws_subnet.private-subnet1.id,
@@ -45,9 +45,9 @@ resource "aws_eks_node_group" "my_node_group" {
     min_size     = 2
     max_size     = 2
   }
-  instance_types = ["t2.micro"]
+  instance_types = var.instance_type
   labels = {
-    role = "nodes"
+    role = "my-${var.env}-nodes"
   }
   depends_on = [
     aws_iam_role_policy_attachment.EKSWorkerNodePolicy,

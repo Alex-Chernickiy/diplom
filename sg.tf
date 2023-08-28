@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg" {
-  name        = "mySG"
-  description = "Allow HTTP and SSH inbound traffic"
+  name        = var.sg_name
+  description = "Allow HTTP and SSH inbound traffic for ${var.env}"
   vpc_id      = aws_vpc.main.id
 
 
@@ -27,6 +27,6 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "mySG"
+    Name = "my ${var.env} security group"
   }
 }

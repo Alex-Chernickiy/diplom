@@ -1,5 +1,5 @@
 resource "aws_iam_role" "cluster_role" {
-  name = "my-cluster-role"
+  name = var.eks_cluster_role
 
   assume_role_policy = <<POLICY
 {
@@ -23,9 +23,9 @@ resource "aws_iam_role_policy_attachment" "cluster_policies" {
 }
 
 resource "aws_eks_cluster" "my-cluster" {
-  name     = "my-cluster"
+  name     = var.eks_cluster_name
   role_arn = aws_iam_role.cluster_role.arn
-  version  = "1.27"
+  version  = var.eks_cluster_version
 
   vpc_config {
     endpoint_public_access = true

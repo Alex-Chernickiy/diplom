@@ -2,12 +2,12 @@ resource "aws_route_table" "rt" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.cidr_rt
     gateway_id = aws_internet_gateway.gw.id
   }
 
   tags = {
-    Name = "my-routing-table-public"
+    Name = var.cidr_rt_name
   }
 }
 
@@ -15,12 +15,12 @@ resource "aws_route_table" "rtnat1" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.cidr_rtnat1
     gateway_id = aws_nat_gateway.nat1.id
   }
 
   tags = {
-    Name = "my-routing-table-nat1"
+    Name = var.cidr_rtnat1_name
   }
 }
 
@@ -28,12 +28,12 @@ resource "aws_route_table" "rtnat2" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.cidr_rtnat2
     gateway_id = aws_nat_gateway.nat2.id
   }
 
   tags = {
-    Name = "my-routing-table-nat2"
+    Name = var.cidr_rtnat2_name
   }
 }
 
