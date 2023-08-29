@@ -6,14 +6,6 @@ variable "secret_key" {
   description = "Secret key to AWS console"
 }
 
-# variable "s3_bucket" {
-#   description = "Name for s3 bucket"
-# }
-
-# variable "s3_bucket_key" {
-#   description = "S3 bucket key"
-# }
-
 variable "env" {
   description = "Environment"
 }
