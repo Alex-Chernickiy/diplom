@@ -13,9 +13,9 @@ output "ecr_name" {
   value       = aws_ecr_repository.ecr.name
 }
 
-output "ecr_name" {
-  description = "ECR repository name."
-  value       = aws_ecr_repository.ecr.name
+output "ecr_id" {
+  description = "ECR repository ID."
+  value       = aws_ecr_repository.ecr.id
 }
 
 output "nat_eip1_public_ip1" {
@@ -58,12 +58,12 @@ output "eks_node_group_status" {
   value       = aws_eks_node_group.my_node_group.status
 }
 
-output "eks_node_group_status" {
+output "eks_node_group_recources" {
   description = "Recources of the node group"
   value       = aws_eks_node_group.my_node_group.resources
 }
 
-output "eks_node_group_status" {
+output "eks_node_group_subnet_ids" {
   description = "Subnets IDs of the node group"
   value       = aws_eks_node_group.my_node_group.subnet_ids
 }
